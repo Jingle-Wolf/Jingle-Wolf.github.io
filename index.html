@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,6 +9,12 @@
         * {
             padding: 0;
             margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Microsoft YaHei", sans-serif;
+            line-height: 1.6;
         }
 
         .shell {
@@ -19,6 +24,8 @@
             transition: 0.3s ease 0s;
             background-attachment: fixed;
             background-size: cover;
+            background-position: center;
+            min-height: 100vh;
         }
 
         .shell:before {
@@ -36,6 +43,7 @@
             text-align: center;
             margin-bottom: 80px;
             position: relative;
+            z-index: 1;
         }
 
         .title {
@@ -43,6 +51,35 @@
             font-size: 46px;
             font-weight: normal;
             margin: 0;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 16px;
+            letter-spacing: 5px;
+            margin: 10px 0 0 0;
+            font-weight: normal;
+        }
+
+        /* 新增时间显示区域样式 */
+        .time-display {
+            color: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            font-size: 18px;
+            margin: 20px auto 0;
+            padding: 15px 25px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            display: inline-block;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            max-width: 90%;
+        }
+
+        .time-display span {
+            font-weight: bold;
+            color: #fff;
+            margin: 0 5px;
         }
 
         .timeline {
@@ -52,24 +89,7 @@
             flex-direction: column;
             max-width: 700px;
             position: relative;
-        }
-
-        .content-title {
-            font-weight: normal;
-            font-size: 66px;
-            margin: -10px 0 0 0;
-            transition: 0.4s;
-            padding: 0 10px;
-            box-sizing: border-box;
-            color: #fff;
-        }
-
-        .content-desc {
-            margin: 0;
-            font-size: 15px;
-            box-sizing: border-box;
-            color: rgba(255, 255, 255, 0.7);
-            line-height: 25px;
+            z-index: 1;
         }
 
         .timeline:before {
@@ -87,11 +107,81 @@
             opacity: 0.3;
             filter: blur(2px);
             transition: 0.5s;
-            box-sizing: border-box;
             width: calc(50% - 40px);
             display: flex;
             position: relative;
             transform: translateY(-80px);
+        }
+
+        .item:nth-child(even) {
+            align-self: flex-end;
+        }
+
+        .item--active {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0px);
+        }
+
+        .item--active .content-title {
+            margin: -50px 0 20px 0;
+        }
+
+        .content {
+            width: 100%;
+            position: relative;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .content-title {
+            font-weight: normal;
+            font-size: 66px;
+            margin: -10px 0 0 0;
+            transition: 0.4s;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .content-desc {
+            margin: 10px 0 0 0;
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 25px;
+        }
+
+        .days-info {
+            margin: 8px 0 0 0;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            font-style: italic;
+            padding: 5px 10px;
+            background: rgba(255, 255, 255, 0);
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        .item-title {
+            display: block;
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 15px;
+            text-align: center;
+            padding: 8px 15px;
+            /*background: rgba(0, 0, 0, 0.4);*/
+            border-radius: 4px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .img {
+            max-width: 100%;
+            height: auto;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.4);
+            border-radius: 4px;
+            margin: 10px 0;
         }
 
         .item:before {
@@ -111,10 +201,6 @@
             letter-spacing: 5px;
         }
 
-        .item:nth-child(even) {
-            align-self: flex-end;
-        }
-
         .item:nth-child(even):before {
             right: auto;
             text-align: right;
@@ -125,33 +211,10 @@
             padding-right: 15px;
         }
 
-        .item--active {
-            opacity: 1;
-            transform: translateY(0);
-            filter: blur(0px);
-        }
-
         .item--active:before {
             top: 50%;
             transition: 0.3s all 0.2s;
             opacity: 1;
-        }
-
-        .item--active .content-title {
-            margin: -50px 0 20px 0;
-        }
-
-        .img {
-            max-width: 100%;
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.4);
-        }
-
-        .subtitle {
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 16px;
-            letter-spacing: 5px;
-            margin: 10px 0 0 0;
-            font-weight: normal;
         }
 
         .footer {
@@ -164,30 +227,122 @@
             display: inline-block;
         }
 
+        /* 移动端优化 */
         @media only screen and (max-width: 767px) {
+            .shell {
+                padding: 30px 0;
+            }
+            
+            .header {
+                margin-bottom: 40px;
+                padding: 0 20px;
+            }
+            
+            .title {
+                font-size: 32px;
+                line-height: 1.3;
+            }
+            
+            .subtitle {
+                font-size: 14px;
+                letter-spacing: 3px;
+                margin-top: 15px;
+            }
+            
+            .time-display {
+                font-size: 16px;
+                padding: 12px 20px;
+                margin-top: 15px;
+            }
+            
+            .timeline {
+                max-width: 100%;
+                padding: 0 20px;
+            }
+            
+            .timeline:before {
+                left: 20px;
+            }
+            
             .item {
                 align-self: baseline !important;
                 width: 100%;
-                padding: 0 30px 150px 80px;
+                padding: 0 0 60px 50px;
+                opacity: 1;
+                filter: blur(0px);
+                transform: translateY(0);
             }
-
+            
             .item:before {
-                left: 10px !important;
-                padding: 0 !important;
-                top: 50px;
-                text-align: center !important;
-                width: 60px;
-                border: none !important;
+                display: none;
             }
-
-            .item:last-child {
-                padding-bottom: 40px;
+            
+            .item-title {
+                display: block;
+                font-size: 16px;
+                margin-bottom: 10px;
+                text-align: left;
+                padding: 6px 12px;
+            }
+            
+            .content {
+                padding: 15px;
+            }
+            
+            .content-title {
+                font-size: 42px;
+                margin: 0 0 10px 0;
+            }
+            
+            .content-desc {
+                font-size: 14px;
+                line-height: 1.6;
+                margin: 0 0 8px 0;
+            }
+            
+            .days-info {
+                font-size: 12px;
+                padding: 4px 8px;
+            }
+            
+            .img {
+                margin: 8px 0;
+            }
+            
+            .item--active .content-title {
+                margin: 0 0 10px 0;
+            }
+            
+            .item:nth-child(even) {
+                align-self: baseline;
             }
         }
 
-        @media only screen and (max-width: 767px) {
+        /* 超小屏幕优化（480px以下） */
+        @media only screen and (max-width: 480px) {
+            .title {
+                font-size: 28px;
+            }
+            
+            .content-title {
+                font-size: 36px;
+            }
+            
+            .item {
+                padding-left: 40px;
+            }
+            
+            .item-title {
+                font-size: 15px;
+            }
+            
+            .time-display {
+                font-size: 14px;
+                padding: 10px 15px;
+            }
+            
             .timeline:before {
-                left: 40px;
+                left: 15px;
             }
         }
     </style>
@@ -198,83 +353,116 @@
         <div class="header">
             <h2 class="title">于千万人之中，遇见我要遇见的人</h2>
             <h3 class="subtitle">Among millions of people, I meet the one I am supposed to meet.</h3>
+            <!-- 新增时间显示区域 -->
+            <div class="time-display" id="timeDisplay">
+                Meet：<span id="daysElapsed">0</span>天 <span id="hoursElapsed">0</span>小时 
+                <span id="minutesElapsed">0</span>分钟 <span id="secondsElapsed">0</span>秒
+            </div>
         </div>
         <div class="timeline">
             <div class="item" data-text="《我爱你，没有什么目的。只是爱你。》">
                 <div class="content">
-                    <img src="./src/01.jpg" alt="" class="img">
+                    <span class="item-title">《我爱你，没有什么目的。只是爱你。》</span>
+                    <img src="./img/01.jpg" alt="" class="img">
                     <h2 class="content-title">2025</h2>
                     <p class="content-desc">
-                        2025/8/11： “今天来的可真巧，能遇到你，真好~”
+                        2025/8/11： "今天来的可真巧，能遇到你，真好~"
                     </p>
+                    <p class="days-info"></p>
                 </div>
             </div>
 
             <div class="item" data-text="《初见》">
                 <div class="content">
-                    <img src="./src/02.jpg" alt="" class="img">
+                    <span class="item-title">《初见》</span>
+                    <img src="./img/02.jpg" alt="" class="img">
                     <h2 class="content-title">2025</h2>
                     <p class="content-desc">
-                       2025/8/16： 还记得初见你时，慌乱中带着欢喜，失措中带着雀跃。那种感觉就像淡若云烟的花朵遇见了春风。刹那间，春光便照进了心里。
+                        2025/8/16： 还记得初见你时，慌乱中带着欢喜，失措中带着雀跃。那种感觉就像淡若云烟的花朵遇见了春风。刹那间，春光便照进了心里。
                     </p>
+                    <p class="days-info"></p>
                 </div>
             </div>
 
             <div class="item" data-text="《翘明》">
                 <div class="content">
-                    <img src="./src/03.jpg" alt="" class="img">
+                    <span class="item-title">《翘明》</span>
+                    <img src="./img/03.jpg" alt="" class="img">
                     <h2 class="content-title">2025</h2>
                     <p class="content-desc">
-                        2025/8/29：  “我是一个时常恋旧的人，那晚见你，方懂夜色很美，心中安宁如故。或许这就是缘分。”
+                        2025/8/29： "我是一个时常恋旧的人，那晚见你，方懂夜色很美，心中安宁如故。或许这就是缘分。"
                     </p>
+                    <p class="days-info"></p>
                 </div>
             </div>
 
             <div class="item" data-text="《执手》">
                 <div class="content">
-                    <img src="./src/04.jpg" alt="" class="img">
+                    <span class="item-title">《执手》</span>
+                    <img src="./img/04.jpg" alt="" class="img">
                     <h2 class="content-title">2025</h2>
                     <p class="content-desc">
-                        2025/9/1： “指尖触碰的那一刹，心开始动荡，久违的爱意从四面八方袭来，之后送你一个温暖的拥抱~”
+                        2025/9/1： "指尖触碰的那一刹，心开始动荡，久违的爱意从四面八方袭来，之后送你一个温暖的拥抱~"
                     </p>
+                    <p class="days-info"></p>
                 </div>
             </div>
 
             <div class="item" data-text="《剪水双瞳》">
                 <div class="content">
-                    <img src="./src/05.jpg" alt="" class="img">
+                    <span class="item-title">《剪水双瞳》</span>
+                    <img src="./img/05.jpg" alt="" class="img">
                     <h2 class="content-title">2025</h2>
                     <p class="content-desc">
-                        2025/9/4： “那不经意的一眼，好似春光都被揉碎，千万般情绪，都掺杂进那若深若浅的瞳色之中，晦暗不明，我彻底沦陷了”
+                        2025/9/4： "那不经意的一眼，好似春光都被揉碎，千万般情绪，都掺杂进那若深若浅的瞳色之中，晦暗不明，我彻底沦陷了"
                     </p>
+                    <p class="days-info"></p>
                 </div>
             </div>
 
             <div class="item" data-text="《S—together》">
                 <div class="content">
-                    <img src="./src/06.jpg" alt="" class="img">
+                    <span class="item-title">《S—together》</span>
+                    <img src="./img/06.jpg" alt="" class="img">
                     <h2 class="content-title">2025</h2>
                     <p class="content-desc">
-                        2025/9/8： “如果说一见钟情太敷衍，日久生情太肤浅。那么，那一眼已是万年！”
+                        2025/9/8： "如果说一见钟情太敷衍，日久生情太肤浅。那么，那一眼已是万年！"
                     </p>
+                    <p class="days-info"></p>
+                </div>
+            </div>
+
+            <div class="item" data-text="《芳兰湖》">
+                <div class="content">
+                    <span class="item-title">《芳兰湖》</span>
+                    <img src="./img/08.jpg" alt="" class="img">
+                    <h2 class="content-title">2025</h2>
+                    <p class="content-desc">
+                        2025/9/21： "我想，若把时间酿成酒，那么余生有你，何处不香醇~"
+                    </p>
+                    <p class="days-info"></p>
                 </div>
             </div>
 
             <div class="item" data-text="《未完待续...》">
                 <div class="content">
-                    <img src="./src/07.jpg" alt="" class="img">
+                    <span class="item-title">《未完待续...》</span>
+                    <img src="./img/07.jpg" alt="" class="img">
                     <h2 class="content-title">2025</h2>
                     <p class="content-desc">
-                        “爱是吸引、是感觉、是激素的冲动，是金风玉露一相逢，便胜却人间无数~~~”
+                        "爱是吸引、是感觉、是激素的冲动，是金风玉露一相逢，便胜却人间无数~~~"
                     </p>
+                    <p class="days-info"></p>
                 </div>
             </div>
 
-          
+
+
+        </div>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script>
-
         (function ($) {
             $.fn.timeline = function () {
                 var selectors = {
@@ -283,6 +471,7 @@
                     activeClass: "item--active",
                     img: ".img"
                 };
+                
                 // 将第一个时间轴项目激活，并设置时间轴背景图片为第一个项目的图片
                 selectors.item.eq(0).addClass(selectors.activeClass);
                 selectors.id.css(
@@ -293,18 +482,55 @@
                         .attr("src") +
                     ")"
                 );
+                
                 // 获取时间轴项目的总数
                 var itemLength = selectors.item.length;
+                
+                // 计算并显示每个事件与当前日期的相隔天数
+                function calculateDaysFromToday() {
+                    // 当前日期（2025年9月28日）
+                    var currentDate = new Date('2025-09-28');
+                    
+                    $('.item').each(function() {
+                        var $desc = $(this).find('.content-desc');
+                        var descText = $desc.text();
+                        
+                        // 提取日期部分
+                        var dateMatch = descText.match(/(\d{4}\/\d{1,2}\/\d{1,2})/);
+                        if (dateMatch) {
+                            var eventDate = new Date(dateMatch[1].replace(/\//g, '-'));
+                            var timeDiff = eventDate - currentDate;
+                            var daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+                            
+                            var daysText = '';
+                            if (daysDiff === 0) {
+                                daysText = '今天';
+                            } else if (daysDiff > 0) {
+                                daysText = '还有 ' + daysDiff + ' 天';
+                            } else {
+                                daysText = '已' + Math.abs(daysDiff) + '天';
+                            }
+                            
+                            $(this).find('.days-info').text('距离今天' + daysText);
+                        }
+                    });
+                }
+                
+                // 初始化时计算天数
+                calculateDaysFromToday();
+                
                 // 当页面滚动时，触发滚动事件
                 $(window).scroll(function () {
                     var max, min;
                     // 获取页面滚动的距离
                     var pos = $(this).scrollTop();
+                    
                     selectors.item.each(function (i) {
                         // 获取当前时间轴项目的最小和最大高度
                         min = $(this).offset().top;
                         max = $(this).height() + $(this).offset().top;
                         var that = $(this);
+                        
                         // 如果滚动到最后一个项目，并且超过了当前项目高度的一半，
                         // 则将最后一个项目设置为激活状态，并设置背景图片为最后一个项目的图片
                         if (i == itemLength - 2 && pos > min + $(this).height() / 2) {
@@ -336,15 +562,40 @@
                     });
                 });
             };
-        })(jQuery)
-        /*
-        最后，我们调用 timeline 插件并传入时间轴的 ID 作为参数。
-        这将启用时间轴插件并为该时间轴绑定滚动事件。
-        */
-       $("#shell").timeline();
-
-
+        })(jQuery);
+        
+        // 初始化时间轴
+        $(document).ready(function() {
+            $("#shell").timeline();
+            
+            // 新增：实时时间显示功能
+            function updateTimeDisplay() {
+                // 设定时间（第一个事件的日期）
+                var startDate = new Date('2025-08-11');
+                var currentDate = new Date();
+                
+                // 计算时间差（毫秒）
+                var timeDiff = currentDate - startDate;
+                
+                // 计算天、小时、分钟和秒
+                var days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+                
+                // 更新显示
+                document.getElementById('daysElapsed').textContent = days;
+                document.getElementById('hoursElapsed').textContent = hours;
+                document.getElementById('minutesElapsed').textContent = minutes;
+                document.getElementById('secondsElapsed').textContent = seconds;
+            }
+            
+            // 初始调用一次
+            updateTimeDisplay();
+            
+            // 每秒更新一次
+            setInterval(updateTimeDisplay, 1000);
+        });
     </script>
 </body>
-
 </html>
