@@ -96,7 +96,7 @@ const milestones = [
     {
         date: '2026-1-2',       // 【日期】
         title: '第一个元旦',       // 【标题】
-        img: './images/16.jpg',   // 【图片路径】
+        img: './images/17.jpg',   // 【图片路径】
         desc: '跟小安总会师了！获得挖掘机驾驶体验卡。' 
     },
     {
